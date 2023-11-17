@@ -12,7 +12,7 @@ public class Movie {
 
     int id;
 
-    String name;
+    String title;
 
     String Director;
 
