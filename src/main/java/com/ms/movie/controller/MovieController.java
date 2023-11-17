@@ -2,6 +2,7 @@ package com.ms.movie.controller;
 
 import com.ms.movie.entity.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +13,8 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class MovieController {
-    static final String STUDENT_URL_MS = "http://localhost:8081/";
-
+    @Value("${movie.service.url}")
+    private String movieServiceUrl;
     @Bean
     public RestTemplate getTemplate() {
         return new RestTemplate();    }
@@ -25,13 +26,13 @@ public class MovieController {
     @ResponseBody
     public Movie fetchMovie(@PathVariable int id) {
 
-        Movie movie = restTemplate.exchange(STUDENT_URL_MS+"all/"+id, HttpMethod.GET,null,Movie.class).getBody();
+        Movie movie = restTemplate.exchange(movieServiceUrl+"all/"+id, HttpMethod.GET,null,Movie.class).getBody();
         return movie;
     }
 
     @GetMapping("/find")
     public Movie fetchAllMovies(){
-        return restTemplate.exchange(STUDENT_URL_MS+"all", HttpMethod.GET,null,Movie.class).getBody();
+        return restTemplate.exchange(movieServiceUrl+"all", HttpMethod.GET,null,Movie.class).getBody();
     }
 
 
