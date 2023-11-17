@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 public class MovieController {
     @Value("${movie.service.url}")
     private String movieServiceUrl;
+
     @Bean
     public RestTemplate getTemplate() {
         return new RestTemplate();    }
@@ -38,7 +39,6 @@ public class MovieController {
 
 
 }
-
 
 
 
